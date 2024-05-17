@@ -21,6 +21,7 @@ from freemocap.system.paths_and_filenames.path_getters import (
     create_new_default_recording_name,
     get_gui_state_json_path,
 )
+import tkinter as tk
 
 CALIBRATION_RECORDING_BUTTON_TEXT = "\U0001F534 \U0001F4D0 Start Calibration Recording"
 MOCAP_RECORDING_BUTTON_TEXT = f"{SKULL_EMOJI_STRING} {SPARKLES_EMOJI_STRING} Start Motion Capture Recording"
@@ -84,6 +85,7 @@ class CameraControllerGroupBox(QGroupBox):
     @property
     def charuco_square_size(self) -> float:
         return float(self._charuco_square_size_line_edit.text())
+    
 
     def check_recording_type(self):
         if self._mocap_videos_radio_button.isChecked():
@@ -139,11 +141,28 @@ class CameraControllerGroupBox(QGroupBox):
         hbox.addWidget(self._annotate_charuco_checkbox)
         hbox.addStretch()
         return hbox
+    
+    def _create_weight_input_layout(self):
+        hbox = QHBoxLayout()
+        hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        hbox.addWidget(QLabel("Charuco square size (mm)", parent=self))
+        self._weight_line_edit = QLineEdit(parent=self)
+        self._weight_line_edit.setFixedWidth(50)
+        self._weight_line_edit.setText(str(self.gui_state.charuco_square_size))
+        self._weight_line_edit.setToolTip(
+            "The length of one of the edges of the black squares in the calibration board in mm"
+        )
+        hbox.addWidget(self._charuco_square_size_line_edit)
+
+        hbox.addStretch()
+        return hbox
 
     def _make_options_layout(self):
         options_vbox = QVBoxLayout()
         options_vbox.addLayout(self._create_mocap_recording_option_layout())
         options_vbox.addLayout(self._create_calibration_recording_option_layout())
+        #options_vbox.addLayout(self._create_weight_input_layout())
         options_vbox.addLayout(self._create_videos_will_save_to_layout())
         return options_vbox
 
@@ -257,3 +276,5 @@ class CameraControllerGroupBox(QGroupBox):
     def _on_charuco_square_size_line_edit_changed(self):
         self.gui_state.charuco_square_size = float(self._charuco_square_size_line_edit.text())
         save_gui_state(gui_state=self.gui_state, file_pathstring=get_gui_state_json_path())
+
+    

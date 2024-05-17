@@ -6,13 +6,8 @@ class UAREBA:
     def upper_arm_reba_score(self):
         upper_arm_reba_score = 0
         upper_arm_flex_score = 0
-<<<<<<< HEAD
         # upper_arm_side_score = 0
         # upper_arm_shoulder_rise = 0
-=======
-        upper_arm_side_score = 0
-        upper_arm_shoulder_rise = 0
->>>>>>> 21bd7196c18dc5412d753420b86c2a7bad120962
 
 
         right_flexion = self.UA_degrees[0]
@@ -40,6 +35,7 @@ class UAREBA:
             if 90 <= right_flexion:
                 upper_arm_reba_score += 4
                 upper_arm_flex_score += 4
+
         if right_flexion < left_flexion:
             if -20 <= left_flexion < 20:
                 upper_arm_reba_score += 1
@@ -67,8 +63,4 @@ class UAREBA:
             # if right_shoulder_rise > 90 or left_shoulder_rise > 90:
             #     upper_arm_reba_score += 1
             #     upper_arm_shoulder_rise += 1
-<<<<<<< HEAD
-        return [upper_arm_reba_score]
-=======
-        return [upper_arm_reba_score, upper_arm_flex_score, upper_arm_side_score, upper_arm_shoulder_rise]
->>>>>>> 21bd7196c18dc5412d753420b86c2a7bad120962
+        return [upper_arm_reba_score, upper_arm_flex_score]
