@@ -54,6 +54,9 @@ class HomeWidget(QWidget):
         self._welcome_to_freemocap_title_widget = self._welcome_to_freemocap_title()
         self._layout.addWidget(self._welcome_to_freemocap_title_widget)
 
+        self._sub_title = self._freemocap_sub_title()
+        self._layout.addWidget(self._sub_title)
+
         self._create_new_session_button = WelcomeScreenButton(f"{CREATE_NEW_RECORDING_ACTION_NAME}")
         self._create_new_session_button.clicked.connect(actions.create_new_recording_action.trigger)
         self._layout.addWidget(self._create_new_session_button, alignment=Qt.AlignmentFlag.AlignCenter)
@@ -169,14 +172,23 @@ class HomeWidget(QWidget):
     def _welcome_to_freemocap_title(self):
         logger.debug("Creating `welcome to freemocap` layout")
 
-        session_title_label = QLabel("Welcome  to  FreeMoCap!")
+        session_title_label = QLabel("Welcome  to  FreeMoCaPLUSS\nw.REBA!")
         session_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         session_title_label.setStyleSheet("font-size: 54px;")
 
         return session_title_label
+    
+    def _freemocap_sub_title(self):
+        session_title_sublabel = QLabel("extended by, Arya Diva Pradhana\naffiliated with USM batch 2020")
+        session_title_sublabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        session_title_sublabel.setStyleSheet("font-size: 15px;")
+
+        return session_title_sublabel
 
     def _add_freemocap_logo(self):
         freemocap_logo_label = LogoSvgWidget(image_path=PATH_TO_FREEMOCAP_LOGO_SVG)
+        # ADD USM LOGO LABEL (?)
+        
         self._layout.addStretch(1)
         self._layout.addWidget(freemocap_logo_label)
         self._layout.addStretch(1)

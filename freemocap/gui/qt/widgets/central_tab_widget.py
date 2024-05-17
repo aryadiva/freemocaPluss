@@ -81,7 +81,7 @@ class CentralTabWidget(QTabWidget):
 
     def _create_skelly_viewer_tab(self, tab_widget: QTabWidget):
         logger.debug("Creating export_data tab")
-        tab_widget.addTab(self._skelly_viewer_widget, "Data Viewer")
+        tab_widget.addTab(self._skelly_viewer_widget, "Data Viewer1")
         # tab_widget.setToolTip(skelly_viewer.__repo_url__)
 
     def _create_directory_view_tab(self, tab_widget: QTabWidget):
