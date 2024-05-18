@@ -1,5 +1,6 @@
 import logging
 import multiprocessing
+from pathlib import Path
 
 
 from freemocap.core_processes.post_process_skeleton_data.post_process_skeleton import post_process_data
@@ -25,6 +26,8 @@ from freemocap.system.logging.queue_logger import DirectQueueHandler
 from freemocap.system.logging.configure_logging import log_view_logging_format_string
 from freemocap.utilities.geometry.rotate_by_90_degrees_around_x_axis import rotate_by_90_degrees_around_x_axis
 from freemocap.utilities.kill_event_exception import KillEventException
+
+from scripts.calculate_angles import CalculateAngles
 
 logger = logging.getLogger(__name__)
 
@@ -138,6 +141,15 @@ def process_recording_folder(
         processing_parameters=recording_processing_parameter_model,
         queue=logging_queue,
     )
+    # addition
+    file_path = Path(recording_processing_parameter_model.recording_info_model.output_data_folder_path) / "mediapipe_body_3d_xyz.csv"
+    out_path = Path(recording_processing_parameter_model.recording_info_model.output_data_folder_path) / "angles.csv"
+
+    calc_angles = CalculateAngles()
+
+    calc_angles.main(file_path, out_path)
+    # end
     DataSaver(recording_folder_path=recording_processing_parameter_model.recording_info_model.path).save_all()
 
     logger.info(f"Done processing {recording_processing_parameter_model.recording_info_model.path}")
+    #logger.info("test")

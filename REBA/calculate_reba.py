@@ -2,6 +2,9 @@ import numpy as np
 import neck_reba_score as RebaNeck
 import trunk_reba_score as RebaTrunk
 import leg_reba_score as RebaLeg
+import upper_arm_score as UpperArm
+import lower_arm_score as LowerArm
+import wrist_score as Wrist
 
 class DegreetoREBA:
     def __init__(self, joints_degree):
@@ -83,17 +86,17 @@ class DegreetoREBA:
         
         # step 7: upper arm score
         UA_degrees = self.joints_degree[3]
-        m_upper_arm_REBA = m_upper_arm_REBA.UAREBA(UA_degrees)
+        m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees)
         UA_scores = m_upper_arm_REBA.upper_arm_reba_score()
 
         # step 8: lower arm score
         LA_degrees = self.joints_degree[4]
-        m_lower_arm_REBA = m_lower_arm_REBA.LAREBA(LA_degrees)
+        m_lower_arm_REBA = LowerArm.LAREBA(LA_degrees)
         LA_scores = m_lower_arm_REBA.lower_arm_score()
 
         # step 9: wrist score
         wrist_degrees = self.joints_degree[5]
-        m_wrist_REBA = m_wrist_REBA.WristREBA(wrist_degrees)
+        m_wrist_REBA = Wrist.WristREBA(wrist_degrees)
         wrist_scores = m_wrist_REBA.wrist_reba_score()
 
         # step 10: Look up score in table _B
