@@ -31,6 +31,7 @@ from scripts.calculate_angles import CalculateAngles
 
 logger = logging.getLogger(__name__)
 
+out_path = None
 
 def process_recording_folder(
     recording_processing_parameter_model: ProcessingParameterModel,
@@ -141,15 +142,17 @@ def process_recording_folder(
         processing_parameters=recording_processing_parameter_model,
         queue=logging_queue,
     )
+    DataSaver(recording_folder_path=recording_processing_parameter_model.recording_info_model.path).save_all()
+
     # addition
-    file_path = Path(recording_processing_parameter_model.recording_info_model.output_data_folder_path) / "mediapipe_body_3d_xyz.csv"
+    global out_path
+    angles_csv_path = Path(recording_processing_parameter_model.recording_info_model.output_data_folder_path) / "mediapipe_body_3d_xyz.csv"
     out_path = Path(recording_processing_parameter_model.recording_info_model.output_data_folder_path) / "angles.csv"
 
     calc_angles = CalculateAngles()
-
-    calc_angles.main(file_path, out_path)
+    calc_angles.main(angles_csv_path, out_path)
     # end
-    DataSaver(recording_folder_path=recording_processing_parameter_model.recording_info_model.path).save_all()
 
     logger.info(f"Done processing {recording_processing_parameter_model.recording_info_model.path}")
+    logger.info(f"angles.csv path is on {out_path}")
     #logger.info("test")
