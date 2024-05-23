@@ -57,10 +57,10 @@ class DegreetoREBA:
         m_neck_REBA = RebaNeck.NeckREBA(neck_degrees)
         neck_scores = m_neck_REBA.neck_reba_score()
 
-        # step2: locate trunck posture
-        # trunk_degrees = self.joints_degree[1]
-        # m_trunk_REBA = RebaTrunk.TrunkREBA(trunk_degrees)
-        # trunk_scores = m_trunk_REBA.trunk_reba_score()
+        # step2: locate trunk posture
+        trunk_degrees = self.joints_degree[1]
+        m_trunk_REBA = RebaTrunk.TrunkREBA(trunk_degrees)
+        trunk_scores = m_trunk_REBA.trunk_reba_score()
 
         # # step3: locate legs
         # leg_degrees = [self.joints_degree[2], self.joints_degree[3]]
