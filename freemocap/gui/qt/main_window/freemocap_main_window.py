@@ -356,7 +356,7 @@ class MainWindow(QMainWindow):
         except (
             AttributeError
         ):  # Active Recording and Data Panel widgets rely on each other, so we're guaranteed to hit this every time the app opens
-            logger.debug("Process motion capture data panel not created yet, skipping claibraiton setting")
+            logger.debug("Process motion capture data panel not created yet, skipping calibration setting")
         except Exception as e:
             logger.error(e)
 

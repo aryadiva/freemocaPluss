@@ -97,6 +97,10 @@ class RecordingInfoModel:
     @property
     def raw_mediapipe_3d_data_npy_file_path(self):
         return str(Path(self._path) / OUTPUT_DATA_FOLDER_NAME / RAW_DATA_FOLDER_NAME / RAW_MEDIAPIPE_3D_NPY_FILE_NAME)
+    
+    @property
+    def angles_csv_file_path(self):
+        return str(Path(self._path) / OUTPUT_DATA_FOLDER_NAME / "angles.csv")
 
     @property
     def mediapipe_reprojection_error_data_npy_file_path(self):
