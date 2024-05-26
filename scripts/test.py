@@ -1,46 +1,104 @@
-import numpy as np
+# import sys
+# from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QCheckBox, QButtonGroup
+# from PyQt5.QtCore import Qt
 
-class CalculateAngles2:
-    def __init__(self):
-        pass
+# class MultiLayoutExample(QWidget):
+#     def __init__(self):
+#         super().__init__()
+        
+#         self.initUI()
+        
+#     def initUI(self):
+#         # Create the main horizontal layout
+#         hbox = QHBoxLayout()
+        
+#         # Create the first vertical layout with varying widgets
+#         vbox1 = QVBoxLayout()
+#         vbox1.addWidget(QLabel('Label 1'))
+#         vbox1.addWidget(QLineEdit('Input 1'))
+#         vbox1.addWidget(QPushButton('Button 1'))
+        
+#         # Create the second vertical layout with varying widgets
+#         vbox2 = QVBoxLayout()
+#         vbox2.addWidget(QLabel('Label 2'))
+#         self.checkboxes1 = []
+#         checkbox1_1 = QCheckBox('Checkbox 1.1')
+#         checkbox1_1.setProperty('value', 'Value 1.1')
+#         checkbox1_2 = QCheckBox('Checkbox 1.2')
+#         checkbox1_2.setProperty('value', 'Value 1.2')
+#         checkbox1_3 = QCheckBox('Checkbox 1.3')
+#         checkbox1_3.setProperty('value', 'Value 1.3')
+#         self.checkboxes1.extend([checkbox1_1, checkbox1_2, checkbox1_3])
+#         for checkbox in self.checkboxes1:
+#             checkbox.stateChanged.connect(self.update_checkboxes1)
+#             vbox2.addWidget(checkbox)
+#         vbox2.addWidget(QPushButton('Button 2'))
+        
+#         # Create the third vertical layout with varying widgets
+#         vbox3 = QVBoxLayout()
+#         vbox3.addWidget(QLabel('Label 3'))
+#         vbox3.addWidget(QLineEdit('Input 2'))
+#         vbox3.addWidget(QPushButton('Button 3'))
+        
+#         # Create the fourth vertical layout with varying widgets
+#         vbox4 = QVBoxLayout()
+#         vbox4.addWidget(QLabel('Label 4'))
+#         self.checkboxes2 = []
+#         checkbox2_1 = QCheckBox('Checkbox 2.1')
+#         checkbox2_1.setProperty('value', 'Value 2.1')
+#         checkbox2_2 = QCheckBox('Checkbox 2.2')
+#         checkbox2_2.setProperty('value', 'Value 2.2')
+#         checkbox2_3 = QCheckBox('Checkbox 2.3')
+#         checkbox2_3.setProperty('value', 'Value 2.3')
+#         self.checkboxes2.extend([checkbox2_1, checkbox2_2, checkbox2_3])
+#         for checkbox in self.checkboxes2:
+#             checkbox.stateChanged.connect(self.update_checkboxes2)
+#             vbox4.addWidget(checkbox)
+#         vbox4.addWidget(QPushButton('Button 4'))
+        
+#         # Create the fifth vertical layout with varying widgets
+#         vbox5 = QVBoxLayout()
+#         vbox5.addWidget(QLabel('Label 5'))
+#         vbox5.addWidget(QLineEdit('Input 3'))
+#         vbox5.addWidget(QPushButton('Button 5'))
+        
+#         # Add each vertical layout to the horizontal layout
+#         hbox.addLayout(vbox1)
+#         hbox.addLayout(vbox2)
+#         hbox.addLayout(vbox3)
+#         hbox.addLayout(vbox4)
+#         hbox.addLayout(vbox5)
+        
+#         # Set the main layout of the window
+#         self.setLayout(hbox)
+        
+#         # Set window title and show the window
+#         self.setWindowTitle('Multiple Vertical Layouts in Horizontal Layout')
+#         self.show()
     
-    def calculate_angle_deg(self, vec1, vec2):
-        # Calculate angle between two vectors in degrees
-        unit_vec1 = vec1 / np.linalg.norm(vec1)
-        unit_vec2 = vec2 / np.linalg.norm(vec2)
-        dot_product = np.dot(unit_vec1, unit_vec2)
-        angle_rad = np.arccos(dot_product)
-        angle_deg = np.degrees(angle_rad)
-        return angle_deg
+#     def update_checkboxes1(self, state):
+#         if state == Qt.Checked:
+#             sender = self.sender()
+#             for checkbox in self.checkboxes1:
+#                 if checkbox != sender:
+#                     checkbox.setChecked(False)
+#             self.checked_value1 = sender.property('value')
+#             print(f"Checked value in group 1: {self.checked_value1}")
 
-    def calculate_twist_bend_angles(self, nose, mid_shoulder, l_shoulder, r_shoulder):
-        # Calculate neck side bending (left/right flexion)
-        neck_vector = nose - mid_shoulder
-        vertical_vector = np.array([0, 1, 0])  # Assuming the vertical direction is the y-axis
-        lateral_flex_angle = self.calculate_angle_deg(neck_vector, vertical_vector)
-
-        # Simplified assumption: use horizontal plane (ignoring z-component) for twist
-        horizontal_neck_vector = neck_vector[:2]
-        horizontal_shoulder_vector = (l_shoulder - r_shoulder)[:2]
-        twist_angle = self.calculate_angle_deg(horizontal_neck_vector, horizontal_shoulder_vector)
-
-        return lateral_flex_angle, twist_angle
-
-# Test function with dummy data
-def test_calculate_twist_bend_angles():
-    calc_angles = CalculateAngles2()
+#     def update_checkboxes2(self, state):
+#         if state == Qt.Checked:
+#             sender = self.sender()
+#             for checkbox in self.checkboxes2:
+#                 if checkbox != sender:
+#                     checkbox.setChecked(False)
+#             self.checked_value2 = sender.property('value')
+#             print(f"Checked value in group 2: {self.checked_value2}")
     
-    # Dummy data for testing
-    nose = np.array([1, 2, 3])
-    mid_shoulder = np.array([0, 2, 0])
-    l_shoulder = np.array([-1, 2, 0])
-    r_shoulder = np.array([1, 2, 0])
-    
-    lateral_flex_angle, twist_angle = calc_angles.calculate_twist_bend_angles(nose, mid_shoulder, l_shoulder, r_shoulder)
-    
-    print(f"Lateral Flexion Angle: {lateral_flex_angle}")
-    print(f"Twist Angle: {twist_angle}")
+#     def get_checkbox_value(self, checkbox):
+#         return checkbox.isChecked()
 
-# Run the test
-if __name__ == "__main__":
-    test_calculate_twist_bend_angles()
+# # Main function to run the application
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     ex = MultiLayoutExample()
+#     sys.exit(app.exec_())

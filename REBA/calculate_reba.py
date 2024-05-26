@@ -1,10 +1,10 @@
 import numpy as np
-import neck_reba_score as RebaNeck
-import trunk_reba_score as RebaTrunk
-import leg_reba_score as RebaLeg
-import upper_arm_score as UpperArm
-import lower_arm_score as LowerArm
-import wrist_score as Wrist
+from REBA import neck_reba_score as RebaNeck
+from REBA import trunk_reba_score as RebaTrunk
+from REBA import leg_reba_score as RebaLeg
+from REBA import upper_arm_score as UpperArm
+from REBA import lower_arm_score as LowerArm
+from REBA import wrist_score as Wrist
 
 #from scripts.calculate_angles import CalculateAngles
 
@@ -53,33 +53,33 @@ class DegreetoREBA:
         table_c = self.reba_table_c()
 
         # step1: locate neck position
-        neck_degrees = self.joints_degree[0]
-        m_neck_REBA = RebaNeck.NeckREBA(neck_degrees)
+        neck_degrees = [self.joints_degree[0], self.joints_degree[1], self.joints_degree[2]]
+        m_neck_REBA = RebaNeck.NeckREBA(neck_degrees[0], neck_degrees[1], neck_degrees[2])
         neck_scores = m_neck_REBA.neck_reba_score()
 
         # step2: locate trunk posture
-        trunk_degrees = self.joints_degree[1]
-        m_trunk_REBA = RebaTrunk.TrunkREBA(trunk_degrees)
+        trunk_degrees = [self.joints_degree[3], self.joints_degree[4], self.joints_degree[5]]
+        m_trunk_REBA = RebaTrunk.TrunkREBA(trunk_degrees[0], trunk_degrees[1], trunk_degrees[2])
         trunk_scores = m_trunk_REBA.trunk_reba_score()
 
-        # # step3: locate legs
-        # leg_degrees = [self.joints_degree[2], self.joints_degree[3]]
-        # m_leg_REBA = RebaLeg.LegREBA(leg_degrees)
-        # leg_scores = m_leg_REBA.leg_reba_score()
-        # # leg_scores =[1]
+        # step3: locate legs
+        leg_degrees = [self.joints_degree[6], self.joints_degree[7]]
+        m_leg_REBA = RebaLeg.LegREBA(leg_degrees)
+        leg_scores = m_leg_REBA.leg_reba_score()
+        # leg_scores =[1]
 
-        # # step 4: Look up score in table _A
-        # if neck_scores[0] - 1>2:
-        #     neck_scores[0] = 3
-        # if trunk_scores[0] - 1>4:
-        #     trunk_scores[0]  = 5
-        # if leg_scores[0] - 1>3:
-        #     leg_scores[0] = 4
+        # step 4: Look up score in table _A
+        if neck_scores[0] - 1>2:
+            neck_scores[0] = 3
+        if trunk_scores[0] - 1>4:
+            trunk_scores[0]  = 5
+        if leg_scores[0] - 1>3:
+            leg_scores[0] = 4
         
-        # posture_score_a = table_a[neck_scores[0] - 1][trunk_scores[0] - 1][leg_scores[0] - 1]
+        posture_score_a = table_a[neck_scores[0] - 1][trunk_scores[0] - 1][leg_scores[0] - 1]
 
-        # # step 5: load score in kg
-        # # load = input("what is the load(in kg) ")
+        # step 5: load score in kg
+        # load = input("what is the load(in kg) ")
         # load = 5
         # if 5 <= int(load) < 10:
         #     posture_score_a = posture_score_a + 1
@@ -115,10 +115,10 @@ class DegreetoREBA:
         # posture_score_c = table_c[posture_score_a - 1][posture_score_b - 1]
 
         #return(f"Score for table A is: {posture_score_a}")
-        return(f"Neck score is: {neck_scores}")
+        return(f"Posture score in Table A is: {posture_score_a}")
     
 #joints_degree = [30, 80, 20, 15]
-# joints_degree = []
-# classA_obj = DegreetoREBA(joints_degree)
+# condition = [30, True, True, 80, False, False, 20, 15]
+# classA_obj = DegreetoREBA(condition)
 # A_reba_score = classA_obj.reba_computation()
 # print(A_reba_score)
