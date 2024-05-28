@@ -9,8 +9,8 @@ from REBA import wrist_score as Wrist
 #from scripts.calculate_angles import CalculateAngles
 
 class DegreetoREBA:
-    def __init__(self, joints_degree):
-        self.joints_degree = joints_degree
+    def __init__(self, data):
+        self.data = data
 
     def reba_table_a(self):
         return np.array([
@@ -53,17 +53,17 @@ class DegreetoREBA:
         table_c = self.reba_table_c()
 
         # step1: locate neck position
-        neck_degrees = [self.joints_degree[0], self.joints_degree[1], self.joints_degree[2]]
+        neck_degrees = [self.data[0], self.data[1], self.data[2]]
         m_neck_REBA = RebaNeck.NeckREBA(neck_degrees[0], neck_degrees[1], neck_degrees[2])
         neck_scores = m_neck_REBA.neck_reba_score()
 
         # step2: locate trunk posture
-        trunk_degrees = [self.joints_degree[3], self.joints_degree[4], self.joints_degree[5]]
+        trunk_degrees = [self.data[3], self.data[4], self.data[5]]
         m_trunk_REBA = RebaTrunk.TrunkREBA(trunk_degrees[0], trunk_degrees[1], trunk_degrees[2])
         trunk_scores = m_trunk_REBA.trunk_reba_score()
 
         # step3: locate legs
-        leg_degrees = [self.joints_degree[6], self.joints_degree[7]]
+        leg_degrees = [self.data[6], self.data[7]]
         m_leg_REBA = RebaLeg.LegREBA(leg_degrees)
         leg_scores = m_leg_REBA.leg_reba_score()
         # leg_scores =[1]
@@ -81,23 +81,23 @@ class DegreetoREBA:
         # step 5: load score in kg
         # load = input("what is the load(in kg) ")
         # load = 5
-        # if 5 <= int(load) < 10:
+        # if 5 <= int(self.data[8]) < 10:
         #     posture_score_a = posture_score_a + 1
-        # if 10 <= int(load):
+        # if 10 <= int(self.data[8]):
         #     posture_score_a = posture_score_a + 2
         
         # # step 7: upper arm score
-        # UA_degrees = self.joints_degree[3]
+        # UA_degrees = self.data[3]
         # m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees)
         # UA_scores = m_upper_arm_REBA.upper_arm_reba_score()
 
         # # step 8: lower arm score
-        # LA_degrees = self.joints_degree[4]
+        # LA_degrees = self.data[4]
         # m_lower_arm_REBA = LowerArm.LAREBA(LA_degrees)
         # LA_scores = m_lower_arm_REBA.lower_arm_score()
 
         # # step 9: wrist score
-        # wrist_degrees = self.joints_degree[5]
+        # wrist_degrees = self.data[5]
         # m_wrist_REBA = Wrist.WristREBA(wrist_degrees)
         # wrist_scores = m_wrist_REBA.wrist_reba_score()
 
@@ -117,7 +117,7 @@ class DegreetoREBA:
         #return(f"Score for table A is: {posture_score_a}")
         return(f"Posture score in Table A is: {posture_score_a}")
     
-#joints_degree = [30, 80, 20, 15]
+#data = [30, 80, 20, 15]
 # condition = [30, True, True, 80, False, False, 20, 15]
 # classA_obj = DegreetoREBA(condition)
 # A_reba_score = classA_obj.reba_computation()

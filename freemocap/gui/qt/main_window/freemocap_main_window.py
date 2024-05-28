@@ -102,7 +102,7 @@ class MainWindow(QMainWindow):
 
         self.setMinimumSize(1280, 720)
         self.setWindowIcon(QIcon(PATH_TO_FREEMOCAP_LOGO_SVG))
-        self.setWindowTitle("freemocap \U0001F480 \U00002728")
+        self.setWindowTitle("freemocap++ \U0001F480 \U00002728")
 
         dummy_widget = QWidget()
         self._layout = QHBoxLayout()

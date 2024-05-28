@@ -172,7 +172,7 @@ class HomeWidget(QWidget):
     def _welcome_to_freemocap_title(self):
         logger.debug("Creating `welcome to freemocap` layout")
 
-        session_title_label = QLabel("Welcome  to  FreeMoCaPLUSS\nw.REBA!")
+        session_title_label = QLabel("Welcome  to  FreeMoCaP++\nw.REBA!")
         session_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         session_title_label.setStyleSheet("font-size: 54px;")
 

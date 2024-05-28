@@ -1,11 +1,27 @@
+import configparser
 import csv
 import numpy as np
 
 from REBA.calculate_reba import DegreetoREBA
-
 class CalculateAngles:
     def __init__(self):
+        self.config_check_path = "C:\\Users\\Arya\\config_check.ini"
         pass
+
+    def read_config(self):
+        config = configparser.ConfigParser()
+        config.read(self.config_check_path)
+        
+        option_values = []
+        for key, value in config.items('DEFAULT'):
+            if value.lower() == 'unchecked':
+                option_values.append(False)
+            elif value.lower() == 'checked':
+                option_values.append(True)
+            else:
+                option_values.append(value)
+        
+        return option_values
 
     def read_coordinates_from_csv(self, file_path, columns):
         coordinates = {key: [] for key in columns}
@@ -42,6 +58,9 @@ class CalculateAngles:
         return 180 - self.calculate_angle_deg(p1, p2, p3)
 
     def main(self, file_path, out_path):
+        self.calc_angles = CalculateAngles()
+        self.data = self.calc_angles.read_config()
+
         columns = {
             'nose': (0, 1, 2),
             'l_shoulder': (33, 34, 35),
@@ -75,9 +94,12 @@ class CalculateAngles:
             'lower_left_arm': [],
             'lower_right_arm': [],
             'lower_left_leg': [],
-            'lower_right_leg': [],
-            'REBA': []
+            'lower_right_leg': []
+            # 'REBA': []
         }
+        calc_reba = DegreetoREBA([angles_dict['neck'], self.data[3], self.data[4], 
+                                  angles_dict['trunk'], self.data[5], self.data[6], 
+                                  angles_dict['lower_right_leg'], angles_dict['lower_left_leg']])
 
         for i in range(len(coordinates['nose'])):
             angles_dict['neck'].append(self.calculate_and_transform_angle(
@@ -106,5 +128,7 @@ class CalculateAngles:
 # angles_csv_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\mediapipe_body_3d_xyz.csv"
 # out_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\angles3.csv"
 
-# calc_angles = CalculateAngles()
+calc_angles = CalculateAngles()
+data = calc_angles.read_config()
 # calc_angles.main(angles_csv_path, out_path)
+#print(data[0])

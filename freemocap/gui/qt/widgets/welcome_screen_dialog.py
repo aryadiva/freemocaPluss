@@ -16,12 +16,12 @@ class WelcomeScreenDialog(QDialog):
 
         self.setMinimumSize(600, 300)
 
-        self.setWindowTitle("Welcome to FreemocaPLUSS!")
+        self.setWindowTitle("Welcome to Freemocap++!")
 
         self._layout = QVBoxLayout()
         self.setLayout(self._layout)
 
-        welcome_message = SPARKLES_EMOJI_STRING + "Welcome to FreemocaPLUSS!" + SPARKLES_EMOJI_STRING
+        welcome_message = SPARKLES_EMOJI_STRING + "Welcome to Freemocap++!" + SPARKLES_EMOJI_STRING
 
         welcome_text_label = QLabel(welcome_message)
         welcome_text_label.setWordWrap(True)
