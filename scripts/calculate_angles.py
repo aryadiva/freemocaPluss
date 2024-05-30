@@ -59,7 +59,7 @@ class CalculateAngles:
 
     def main(self, file_path, out_path):
         self.calc_angles = CalculateAngles()
-        self.data = self.calc_angles.read_config()
+        self.dataTF = self.calc_angles.read_config()
 
         columns = {
             'nose': (0, 1, 2),
@@ -94,12 +94,9 @@ class CalculateAngles:
             'lower_left_arm': [],
             'lower_right_arm': [],
             'lower_left_leg': [],
-            'lower_right_leg': []
-            # 'REBA': []
+            'lower_right_leg': [],
+            'REBA': []
         }
-        calc_reba = DegreetoREBA([angles_dict['neck'], self.data[3], self.data[4], 
-                                  angles_dict['trunk'], self.data[5], self.data[6], 
-                                  angles_dict['lower_right_leg'], angles_dict['lower_left_leg']])
 
         for i in range(len(coordinates['nose'])):
             angles_dict['neck'].append(self.calculate_and_transform_angle(
@@ -122,13 +119,127 @@ class CalculateAngles:
                 coordinates['l_hip'][i], coordinates['l_knee'][i], coordinates['l_ankle'][i]))
             angles_dict['lower_right_leg'].append(self.calculate_and_transform_angle(
                 coordinates['r_hip'][i], coordinates['r_knee'][i], coordinates['r_ankle'][i]))
+            
+            if self.dataTF[0] is True:
+                    if self.dataTF[10] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[0],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[10]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[11] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[0],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[11]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[12] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[0],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[12]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[13] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[0],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[13]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    else:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            False,
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            False
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+            if self.dataTF[1] is True:
+                    if self.dataTF[10] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[1],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[10]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[11] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[1],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[11]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[12] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[1],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[12]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    if self.dataTF[13] is True:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            self.dataTF[1],
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            self.dataTF[13]
+                            ])
+                        angles_dict['REBA'].append(calc_reba)
+                    else:
+                        calc_reba = DegreetoREBA([
+                            angles_dict['neck'][i], self.dataTF[3], self.dataTF[4], 
+                            angles_dict['trunk'][i], self.dataTF[5], self.dataTF[6], 
+                            angles_dict['lower_right_leg'][i], angles_dict['lower_left_leg'][i],
+                            False,
+                            angles_dict['upper_right_arm'][i], angles_dict['upper_left_arm'][i], self.dataTF[7], self.dataTF[8], self.dataTF[9],
+                            angles_dict['lower_right_arm'][i], angles_dict['lower_left_arm'][i],
+                            False
+                            ])
+
+
 
         self.write_angles_to_csv(angles_dict, out_path)
 
 # angles_csv_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\mediapipe_body_3d_xyz.csv"
 # out_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\angles3.csv"
 
-calc_angles = CalculateAngles()
-data = calc_angles.read_config()
-# calc_angles.main(angles_csv_path, out_path)
-#print(data[0])
+#calc_angles = CalculateAngles()
+#data = calc_angles.read_config()
+#calc_angles.main(angles_csv_path, out_path)
+#print(data[1])

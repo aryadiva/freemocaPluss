@@ -81,15 +81,19 @@ class DegreetoREBA:
         # step 5: load score in kg
         # load = input("what is the load(in kg) ")
         # load = 5
-        # if 5 <= int(self.data[8]) < 10:
-        #     posture_score_a = posture_score_a + 1
-        # if 10 <= int(self.data[8]):
-        #     posture_score_a = posture_score_a + 2
+        if self.data[8] is True: # if weight is less than 5kg
+            posture_score_a = posture_score_a + 1
+        if self.data[8] is True: # if weight is between 5kg and 10kg
+            posture_score_a = posture_score_a + 2
+        if self.data[8] is True: # if weight is more than 10kg
+            posture_score_a = posture_score_a + 3
+        else:
+            posture_score_a = posture_score_a + 0
         
         # # step 7: upper arm score
-        # UA_degrees = self.data[3]
-        # m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees)
-        # UA_scores = m_upper_arm_REBA.upper_arm_reba_score()
+        UA_degrees = [self.data[9], self.data[10], self.data[11], self.data[12]]
+        m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees)
+        UA_scores = m_upper_arm_REBA.upper_arm_reba_score()
 
         # # step 8: lower arm score
         # LA_degrees = self.data[4]
