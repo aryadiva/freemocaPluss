@@ -38,4 +38,4 @@ class NeckREBA:
             neck_reba_score += 1
             #neck_twist_score += 1
 
-        return [neck_reba_score]
+        return neck_reba_score

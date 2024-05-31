@@ -1,7 +1,8 @@
 class UAREBA:
     # For calculating REBA score based on degrees
-    def __init__(self, arm_degrees, raised, abducted, leaning):
-        self.arm_degrees = arm_degrees
+    def __init__(self, r_arm_degrees, l_arm_degrees, raised, abducted, leaning):
+        self.r_arm_degrees = r_arm_degrees
+        self.l_arm_degrees = l_arm_degrees
         self.raised = raised
         self.abducted = abducted
         self.leaning = leaning
@@ -15,8 +16,8 @@ class UAREBA:
         # upper_arm_shoulder_rise = 0
 
 
-        right_flexion = self.arm_degrees[0]
-        left_flexion = self.arm_degrees[1]
+        right_flexion = self.r_arm_degrees
+        left_flexion = self.l_arm_degrees
 
         # right_side = self.UA_degrees[2]
         # left_side = self.UA_degrees[3]
@@ -75,4 +76,4 @@ class UAREBA:
             if arm_leaning is True:
                 upper_arm_reba_score -= 1
                 # upper_arm_shoulder_rise += 1
-        return [upper_arm_reba_score]
+        return upper_arm_reba_score

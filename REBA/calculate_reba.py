@@ -64,19 +64,19 @@ class DegreetoREBA:
 
         # step3: locate legs
         leg_degrees = [self.data[6], self.data[7]]
-        m_leg_REBA = RebaLeg.LegREBA(leg_degrees)
+        m_leg_REBA = RebaLeg.LegREBA(leg_degrees[0], leg_degrees[1])
         leg_scores = m_leg_REBA.leg_reba_score()
         # leg_scores =[1]
 
         # step 4: Look up score in table _A
-        if neck_scores[0] - 1>2:
-            neck_scores[0] = 3
-        if trunk_scores[0] - 1>4:
-            trunk_scores[0]  = 5
-        if leg_scores[0] - 1>3:
-            leg_scores[0] = 4
+        if neck_scores - 1>2:
+            neck_scores = 3
+        if trunk_scores - 1>4:
+            trunk_scores  = 5
+        if leg_scores - 1>3:
+            leg_scores = 4
         
-        posture_score_a = table_a[neck_scores[0] - 1][trunk_scores[0] - 1][leg_scores[0] - 1]
+        posture_score_a = table_a[neck_scores - 1][trunk_scores - 1][leg_scores - 1]
 
         # step 5: load score in kg
         # load = input("what is the load(in kg) ")
@@ -91,38 +91,38 @@ class DegreetoREBA:
             posture_score_a = posture_score_a + 0
         
         # # step 7: upper arm score
-        UA_degrees = [self.data[9], self.data[10], self.data[11], self.data[12]]
-        m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees)
+        UA_degrees = [self.data[9], self.data[10], self.data[11], self.data[12], self.data[13]]
+        m_upper_arm_REBA = UpperArm.UAREBA(UA_degrees[0], UA_degrees[1], UA_degrees[2], UA_degrees[3], UA_degrees[4])
         UA_scores = m_upper_arm_REBA.upper_arm_reba_score()
 
         # # step 8: lower arm score
-        # LA_degrees = self.data[4]
-        # m_lower_arm_REBA = LowerArm.LAREBA(LA_degrees)
-        # LA_scores = m_lower_arm_REBA.lower_arm_score()
+        LA_degrees = [self.data[14], self.data[15]]
+        m_lower_arm_REBA = LowerArm.LAREBA(LA_degrees[0], LA_degrees[1])
+        LA_scores = m_lower_arm_REBA.lower_arm_score()
 
         # # step 9: wrist score
-        # wrist_degrees = self.data[5]
-        # m_wrist_REBA = Wrist.WristREBA(wrist_degrees)
-        # wrist_scores = m_wrist_REBA.wrist_reba_score()
+        wrist_degrees = [self.data[16], self.data[17], self.data[18]]
+        m_wrist_REBA = Wrist.WristREBA(wrist_degrees[0], wrist_degrees[1], wrist_degrees[2])
+        wrist_scores = m_wrist_REBA.wrist_reba_score()
 
         # # step 10: Look up score in table _B
-        # posture_score_b = table_b[UA_scores[0] - 1][LA_scores - 1][wrist_scores[0] - 1]
+        posture_score_b = table_b[UA_scores - 1][LA_scores - 1][wrist_scores - 1]
 
         # # step 11: coupling score
         # #  assume coupling is 2
-        # coupling = 2
+        coupling = int(self.data[18])
         # # coupling = input("what is the coupling condition?(good(0) or fair(1) or poor(2) or unacceptable(3)? ")
 
-        # posture_score_b = posture_score_b + int(coupling)
+        posture_score_b = posture_score_b + coupling
 
         # # step 12: look up score in table C
-        # posture_score_c = table_c[posture_score_a - 1][posture_score_b - 1]
+        posture_score_c = table_c[posture_score_a - 1][posture_score_b - 1]
 
         #return(f"Score for table A is: {posture_score_a}")
-        return(f"Posture score in Table A is: {posture_score_a}")
+        return(posture_score_c)
     
 #data = [30, 80, 20, 15]
-# condition = [30, True, True, 80, False, False, 20, 15]
+# condition = [30, True, False, 80, False, False, 20, 15, False, 40, 22, False, True, False, 60, 35, 5, 10, False, '1'] # 18
 # classA_obj = DegreetoREBA(condition)
 # A_reba_score = classA_obj.reba_computation()
 # print(A_reba_score)

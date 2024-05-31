@@ -1,12 +1,13 @@
 class LAREBA:
     # For calculating REBA score based on degrees
-    def __init__(self, LA_degrees):
-        self.LA_degrees = LA_degrees
+    def __init__(self, r_LA_degrees, l_LA_degrees):
+        self.r_LA_degrees = r_LA_degrees
+        self.l_LA_degrees = l_LA_degrees
 
     def lower_arm_score(self):
-        degree = self.LA_degrees
-        right_degree = degree[0]
-        left_degree = degree[1]
+        # degree = self.LA_degrees
+        right_degree = self.r_LA_degrees
+        left_degree = self.l_LA_degrees
         lower_arm_reba_score = 0
         if right_degree >= left_degree:
             if 0 <= right_degree < 60:
