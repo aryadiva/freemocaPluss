@@ -51,6 +51,7 @@ FREEMOCAP_SAMPLE_DATA_RECORDING_NAME = "freemocap_sample_data"
 
 # logo
 PATH_TO_FREEMOCAP_LOGO_SVG = str(Path(freemocap.__file__).parent / "assets/logo/freemocap-logo-black-border.svg")
+PATH_TO_USM_LOGO_SVG = str(Path(freemocap.__file__).parent / "assets/logo/usm_logo.svg")
 
 # progress bars
 LOG_VIEW_PROGRESS_BAR_STRING = "Log Progress"
