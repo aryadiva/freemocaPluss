@@ -28,9 +28,6 @@ class UAREBA:
         if right_flexion >= left_flexion:
             if -20 <= right_flexion < 20:
                 upper_arm_reba_score += 1
-                upper_arm_reba_score += 1
-                upper_arm_reba_score += 1
-                upper_arm_reba_score += 1
                 # upper_arm_flex_score += 1
             if 20 <= right_flexion < 45:
                 upper_arm_reba_score += 2

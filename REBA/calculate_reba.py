@@ -69,26 +69,24 @@ class DegreetoREBA:
         # leg_scores =[1]
 
         # step 4: Look up score in table _A
-        if neck_scores - 1>2:
+        if neck_scores > 2:
             neck_scores = 3
-        if trunk_scores - 1>4:
+        if trunk_scores > 4:
             trunk_scores  = 5
-        if leg_scores - 1>3:
+        if leg_scores > 3:
             leg_scores = 4
         
-        posture_score_a = table_a[neck_scores - 1][trunk_scores - 1][leg_scores - 1]
+        posture_score_a = table_a[neck_scores - 1][trunk_scores - 1][leg_scores - 1] + self.data[8] #weight
 
         # step 5: load score in kg
         # load = input("what is the load(in kg) ")
         # load = 5
-        if self.data[8] is True: # if weight is less than 5kg
-            posture_score_a = posture_score_a + 1
-        if self.data[8] is True: # if weight is between 5kg and 10kg
-            posture_score_a = posture_score_a + 2
-        if self.data[8] is True: # if weight is more than 10kg
-            posture_score_a = posture_score_a + 3
-        else:
-            posture_score_a = posture_score_a + 0
+        # if self.data[8] is True: # if weight is less than 5kg
+        #     posture_score_a = posture_score_a + 1
+        # elif self.data[8] is True: # if weight is between 5kg and 10kg
+        #     posture_score_a = posture_score_a + 2
+        # elif self.data[8] is True: # if weight is more than 10kg
+        #     posture_score_a = posture_score_a + 3
         
         # # step 7: upper arm score
         UA_degrees = [self.data[9], self.data[10], self.data[11], self.data[12], self.data[13]]
@@ -109,17 +107,16 @@ class DegreetoREBA:
         posture_score_b = table_b[UA_scores - 1][LA_scores - 1][wrist_scores - 1]
 
         # # step 11: coupling score
-        # #  assume coupling is 2
-        coupling = int(self.data[18])
-        # # coupling = input("what is the coupling condition?(good(0) or fair(1) or poor(2) or unacceptable(3)? ")
+        coupling = self.data[19]
+        # # coupling = input("what is the coupling condition?(good(0) or fair(1) or poor(2) or unacceptable(3)?")
 
         posture_score_b = posture_score_b + coupling
 
-        # # step 12: look up score in table C
+        # step 12: look up score in table C
         posture_score_c = table_c[posture_score_a - 1][posture_score_b - 1]
 
         #return(f"Score for table A is: {posture_score_a}")
-        return(posture_score_c)
+        return posture_score_c
     
 #data = [30, 80, 20, 15]
 # condition = [30, True, False, 80, False, False, 20, 15, False, 40, 22, False, True, False, 60, 35, 5, 10, False, '1'] # 18

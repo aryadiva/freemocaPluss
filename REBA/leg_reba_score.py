@@ -8,7 +8,7 @@ class LegREBA:
         right_leg_degree = self.r_leg_degrees
         left_leg_degree = self.l_leg_degrees
 
-        if abs(right_leg_degree) >= abs(left_leg_degree):
+        if right_leg_degree >= right_leg_degree:
             if right_leg_degree < 30:
                 leg_reba_score = leg_reba_score + 1
             if 30 <= right_leg_degree < 60:
