@@ -179,7 +179,7 @@ class HomeWidget(QWidget):
         return session_title_label
     
     def _freemocap_sub_title(self):
-        session_title_sublabel = QLabel("extended by, Arya Diva Pradhana\naffiliated with USM batch 2020")
+        session_title_sublabel = QLabel("extended by, Arya Diva Pradhana (154439)\naffiliated with USM batch 2020")
         session_title_sublabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         session_title_sublabel.setStyleSheet("font-size: 15px;")
 
@@ -191,5 +191,5 @@ class HomeWidget(QWidget):
         # ADD USM LOGO LABEL (?)
         
         self._layout.addStretch(1)
-        self._layout.addWidget(freemocap_logo_label)
+        self._layout.addWidget(usm_logo_label)
         self._layout.addStretch(1)
