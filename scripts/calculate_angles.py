@@ -5,7 +5,7 @@ import numpy as np
 from REBA.calculate_reba import DegreetoREBA
 class CalculateAngles:
     def __init__(self):
-        self.config_check_path = "C:\\Users\\Arya\\config_check.ini"
+        self.config_check_path = "config_check.ini"
         pass
 
     def read_config(self):
@@ -152,7 +152,7 @@ class CalculateAngles:
         #print("Asumming all limbs condition doesn't require adjustments since initial weight isn't checked")
         for i in range(len(coordinates['nose'])):
             angles_dict['neck'].append(self.calculate_and_transform_angle(
-                coordinates['nose'][i], mid_shoulder[i], mid_hip[i]) - 20)
+                coordinates['nose'][i], mid_shoulder[i], mid_hip[i])-35)
             angles_dict['trunk'].append(self.calculate_and_transform_angle(
                 mid_shoulder[i], mid_hip[i], mid_knee[i]))
             angles_dict['upper_left_arm'].append(self.calculate_angle_deg(
@@ -378,10 +378,10 @@ class CalculateAngles:
 
         self.write_angles_to_csv(angles_dict, out_path)
 
-# angles_csv_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\mediapipe_body_3d_xyz.csv"
-# out_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\sample1\\output_data\\angles3.csv"
+# angles_csv_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\session_2024-06-03_12_30_30\\recording_12_35_58_gmt+8\\output_data\\mediapipe_body_3d_xyz.csv"
+# out_path = "C:\\Users\\Arya\\freemocap_data\\recording_sessions\\session_2024-06-03_12_30_30\\recording_12_35_58_gmt+8\\output_data\\angles.csv"
 
-#calc_angles = CalculateAngles()
-#data = calc_angles.read_config()
-#calc_angles.main(angles_csv_path, out_path)
+# calc_angles = CalculateAngles()
+# data = calc_angles.read_config()
+# calc_angles.main(angles_csv_path, out_path)
 #print(data[1])
